@@ -20,7 +20,6 @@
     overflow: hidden;
     font-family: 'Great Vibes', cursive;
 
-    /* Ρομαντικό φόντο */
     background: radial-gradient(circle at top, #ff7aa2, #d1004b 60%, #6a0025);
     color: white;
     text-align: center;
@@ -28,9 +27,7 @@
     opacity: 0;
   }
 
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
+  @keyframes fadeIn { to { opacity: 1; } }
 
   .wrapper {
     width: 100%;
@@ -38,7 +35,6 @@
     padding: 16px;
   }
 
-  /* Φωτογραφία */
   .photo {
     width: 100%;
     max-height: 58vh;
@@ -66,20 +62,6 @@
     opacity: 0.95;
   }
 
-  /* Μήνυμα αγάπης */
-  .love-message {
-    margin-top: 10px;
-    font-size: 18px;
-    opacity: 0;
-    animation: showMessage 3s ease forwards;
-    animation-delay: 2.5s;
-  }
-
-  @keyframes showMessage {
-    to { opacity: 1; }
-  }
-
-  /* Μετρητής ημερών */
   .counter {
     margin-top: 6px;
     font-size: 16px;
@@ -87,7 +69,6 @@
     font-family: Arial, sans-serif;
   }
 
-  /* Κινούμενες καρδιές */
   .heart {
     position: fixed;
     bottom: -20px;
@@ -102,7 +83,18 @@
     100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
   }
 
-  /* Κουμπί μουσικής */
+  .burst-heart {
+    position: fixed;
+    font-size: 20px;
+    pointer-events: none;
+    animation: burst 0.8s ease-out forwards;
+  }
+
+  @keyframes burst {
+    from { transform: scale(0.5); opacity: 1; }
+    to { transform: scale(1.8) translateY(-40px); opacity: 0; }
+  }
+
   .music-btn {
     margin-top: 14px;
     padding: 10px 18px;
@@ -112,6 +104,19 @@
     color: white;
     font-size: 16px;
     font-family: Arial, sans-serif;
+  }
+
+  .install-banner {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.6);
+    padding: 10px 16px;
+    border-radius: 14px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    display: none;
   }
 </style>
 </head>
@@ -123,7 +128,6 @@
     <div class="names">Σμαράγδα ❤️ Φώτης</div>
     <div class="date">01/10/2025</div>
 
-    <div class="love-message">Σ’ αγαπώ περισσότερο κάθε μέρα 💖</div>
     <div class="counter" id="daysTogether"></div>
 
     <button class="music-btn" onclick="playMusic()">🎵 Παίξε το τραγούδι μας</button>
@@ -139,6 +143,8 @@
   <div class="heart" style="left:84%; animation-duration:8.5s;">❤️</div>
   <div class="heart" style="left:92%; animation-duration:11s;">💖</div>
 
+  <div class="install-banner" id="installBanner">📱 Πρόσθεσέ το στην αρχική οθόνη</div>
+
   <audio id="bgMusic" loop>
     <source src="Iliaxtida.mp3" type="audio/mpeg" />
   </audio>
@@ -148,15 +154,44 @@
       document.getElementById('bgMusic').play();
     }
 
-    // Υπολογισμός ημερών μαζί
+    // Μετρητής ημερών σχέσης
     const startDate = new Date('2025-10-01');
     const today = new Date();
     const diffTime = today - startDate;
     const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
     if (days >= 0) {
       document.getElementById('daysTogether').innerText = `Μαζί για ${days} μέρες ❤️`;
     }
+
+    // Hearts burst on touch
+    document.addEventListener('click', (e) => {
+      for (let i = 0; i < 6; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'burst-heart';
+        heart.innerText = '❤️';
+        heart.style.left = e.clientX + (Math.random()*40-20) + 'px';
+        heart.style.top = e.clientY + (Math.random()*40-20) + 'px';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 800);
+      }
+    });
+
+    // Add to Home Screen banner
+    let deferredPrompt;
+    const banner = document.getElementById('installBanner');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      banner.style.display = 'block';
+
+      banner.addEventListener('click', async () => {
+        banner.style.display = 'none';
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+      });
+    });
   </script>
 </body>
 </html>
