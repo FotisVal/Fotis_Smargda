@@ -8,6 +8,8 @@
 <style>
   * { box-sizing: border-box; }
 
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
   body {
     margin: 0;
     height: 100vh;
@@ -15,9 +17,8 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    font-family: Arial, sans-serif;
+    font-family: 'Great Vibes', cursive;
 
-    /* Ρομαντικό φόντο */
     background: radial-gradient(circle at top, #ff7aa2, #d1004b 60%, #6a0025);
     color: white;
     text-align: center;
@@ -27,30 +28,44 @@
     width: 100%;
     max-width: 360px;
     padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
   }
 
-  /* Φωτογραφία σωστού μεγέθους για κινητό */
   .photo {
     width: 100%;
-    max-height: 60vh;
-    border-radius: 20px;
+    max-height: 55vh;
+    margin-top: -20px;
+    border-radius: 22px;
     object-fit: cover;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.45);
   }
 
   .names {
-    margin-top: 14px;
-    font-size: 22px;
-    font-weight: bold;
+    margin-top: 16px;
+    font-size: 32px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.4);
   }
 
   .date {
-    margin-top: 4px;
-    font-size: 16px;
-    opacity: 0.9;
+    margin-top: 6px;
+    font-size: 18px;
+    opacity: 0.95;
   }
 
-  /* Κινούμενες καρδιές */
+  .music-btn {
+    margin-top: 14px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.18);
+    color: white;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+
   .heart {
     position: fixed;
     bottom: -20px;
@@ -62,18 +77,7 @@
   @keyframes rise {
     0% { transform: translateY(0) scale(0.8); opacity: 0; }
     10% { opacity: 1; }
-    100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
-  }
-
-  /* Κουμπί για μουσική (απαραίτητο σε κινητά) */
-  .music-btn {
-    margin-top: 14px;
-    padding: 10px 18px;
-    border: none;
-    border-radius: 12px;
-    background: rgba(255,255,255,0.15);
-    color: white;
-    font-size: 14px;
+    100% { transform: translateY(-110vh) scale(1.25); opacity: 0; }
   }
 </style>
 </head>
@@ -85,16 +89,22 @@
     <div class="names">Σμαράγδα ❤️ Φώτης</div>
     <div class="date">01/10/2025</div>
 
-    <button class="music-btn" onclick="playMusic()">🎵 Παίξε το τραγούδι μας</button>
+    <button class="music-btn" onclick="playMusic()">🎵 Πάτα να παίξει 🎵 </button>
   </div>
 
-  <!-- Πολλές καρδιές -->
-  <div class="heart" style="left:10%; animation-duration:7s;">❤️</div>
-  <div class="heart" style="left:25%; animation-duration:9s;">💖</div>
-  <div class="heart" style="left:40%; animation-duration:8s;">💕</div>
-  <div class="heart" style="left:60%; animation-duration:10s;">💗</div>
-  <div class="heart" style="left:75%; animation-duration:7.5s;">💓</div>
-  <div class="heart" style="left:90%; animation-duration:9.5s;">💞</div>
+  <!-- Διπλάσιες κινούμενες καρδιές -->
+  <div class="heart" style="left:5%; animation-duration:7s;">❤️</div>
+  <div class="heart" style="left:12%; animation-duration:9s;">💖</div>
+  <div class="heart" style="left:20%; animation-duration:8s;">💕</div>
+  <div class="heart" style="left:28%; animation-duration:10s;">💗</div>
+  <div class="heart" style="left:36%; animation-duration:7.5s;">💓</div>
+  <div class="heart" style="left:44%; animation-duration:9.5s;">💞</div>
+  <div class="heart" style="left:55%; animation-duration:8.2s;">❤️</div>
+  <div class="heart" style="left:63%; animation-duration:10.5s;">💖</div>
+  <div class="heart" style="left:71%; animation-duration:7.8s;">💕</div>
+  <div class="heart" style="left:79%; animation-duration:9.2s;">💗</div>
+  <div class="heart" style="left:87%; animation-duration:8.7s;">💓</div>
+  <div class="heart" style="left:94%; animation-duration:10.2s;">💞</div>
 
   <audio id="bgMusic" loop>
     <source src="Iliaxtida.mp3" type="audio/mpeg" />
