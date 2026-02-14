@@ -24,6 +24,12 @@
     background: radial-gradient(circle at top, #ff7aa2, #d1004b 60%, #6a0025);
     color: white;
     text-align: center;
+    animation: fadeIn 2s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
   }
 
   .wrapper {
@@ -32,7 +38,7 @@
     padding: 16px;
   }
 
-  /* Φωτογραφία σωστού μεγέθους για κινητό */
+  /* Φωτογραφία */
   .photo {
     width: 100%;
     max-height: 58vh;
@@ -40,6 +46,12 @@
     border-radius: 22px;
     object-fit: cover;
     box-shadow: 0 12px 35px rgba(0,0,0,0.45);
+    animation: slowZoom 12s ease-in-out infinite alternate;
+  }
+
+  @keyframes slowZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
   }
 
   .names {
@@ -52,6 +64,27 @@
     margin-top: 6px;
     font-size: 18px;
     opacity: 0.95;
+  }
+
+  /* Μήνυμα αγάπης */
+  .love-message {
+    margin-top: 10px;
+    font-size: 18px;
+    opacity: 0;
+    animation: showMessage 3s ease forwards;
+    animation-delay: 2.5s;
+  }
+
+  @keyframes showMessage {
+    to { opacity: 1; }
+  }
+
+  /* Μετρητής ημερών */
+  .counter {
+    margin-top: 6px;
+    font-size: 16px;
+    opacity: 0.9;
+    font-family: Arial, sans-serif;
   }
 
   /* Κινούμενες καρδιές */
@@ -69,7 +102,7 @@
     100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
   }
 
-  /* Κουμπί για μουσική */
+  /* Κουμπί μουσικής */
   .music-btn {
     margin-top: 14px;
     padding: 10px 18px;
@@ -90,17 +123,21 @@
     <div class="names">Σμαράγδα ❤️ Φώτης</div>
     <div class="date">01/10/2025</div>
 
-    <button class="music-btn" onclick="playMusic()">🎵 Πάτα να παίξει 🎵</button>
+    <div class="love-message">Σ’ αγαπώ περισσότερο κάθε μέρα 💖</div>
+    <div class="counter" id="daysTogether"></div>
+
+    <button class="music-btn" onclick="playMusic()">🎵 Παίξε το τραγούδι μας</button>
   </div>
 
-  <!-- Πολλές κινούμενες καρδιές (όχι διπλάσιες) -->
-  <div class="heart" style="left:8%; animation-duration:7s;">❤️</div>
-  <div class="heart" style="left:22%; animation-duration:9s;">💖</div>
-  <div class="heart" style="left:36%; animation-duration:8s;">💕</div>
-  <div class="heart" style="left:50%; animation-duration:10s;">💗</div>
-  <div class="heart" style="left:64%; animation-duration:7.5s;">💓</div>
-  <div class="heart" style="left:78%; animation-duration:9.5s;">💞</div>
-  <div class="heart" style="left:90%; animation-duration:8.5s;">❤️</div>
+  <!-- Διασκορπισμένες καρδιές -->
+  <div class="heart" style="left:5%; animation-duration:7s;">❤️</div>
+  <div class="heart" style="left:18%; animation-duration:9s;">💖</div>
+  <div class="heart" style="left:33%; animation-duration:8s;">💕</div>
+  <div class="heart" style="left:47%; animation-duration:10s;">💗</div>
+  <div class="heart" style="left:59%; animation-duration:7.5s;">💓</div>
+  <div class="heart" style="left:72%; animation-duration:9.5s;">💞</div>
+  <div class="heart" style="left:84%; animation-duration:8.5s;">❤️</div>
+  <div class="heart" style="left:92%; animation-duration:11s;">💖</div>
 
   <audio id="bgMusic" loop>
     <source src="Iliaxtida.mp3" type="audio/mpeg" />
@@ -109,6 +146,16 @@
   <script>
     function playMusic() {
       document.getElementById('bgMusic').play();
+    }
+
+    // Υπολογισμός ημερών μαζί
+    const startDate = new Date('2025-10-01');
+    const today = new Date();
+    const diffTime = today - startDate;
+    const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (days >= 0) {
+      document.getElementById('daysTogether').innerText = `Μαζί για ${days} μέρες ❤️`;
     }
   </script>
 </body>
