@@ -1,78 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    }
+  .photo {
+    width: 100%;
+    max-height: 60vh;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
 
-    /* Καρδιές που κινούνται γύρω από την οθόνη */
-    .heart {
-      position: absolute;
-      font-size: 20px;
-      animation: floatHeart linear infinite;
-      pointer-events: none;
-    }
+  .names {
+    margin-top: 14px;
+    font-size: 22px;
+    font-weight: bold;
+  }
 
-    @keyframes floatHeart {
-      0% {
-        transform: translateY(100vh) scale(0.8) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      50% {
-        transform: translateY(40vh) scale(1.1) rotate(180deg);
-      }
-      100% {
-        transform: translateY(-10vh) scale(0.9) rotate(360deg);
-        opacity: 0;
-      }
-    }
+  .date {
+    margin-top: 4px;
+    font-size: 16px;
+    opacity: 0.9;
+  }
 
-    /* Ονόματα & ημερομηνία */
-    .names {
-      font-size: 22px;
-      font-weight: bold;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
+  /* Κινούμενες καρδιές */
+  .heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 18px;
+    animation: rise linear infinite;
+    pointer-events: none;
+  }
 
-    .date {
-      margin-top: 6px;
-      font-size: 16px;
-      opacity: 0.9;
-    }
+  @keyframes rise {
+    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+  }
 
-    /* Κρυφή μουσική */
-    audio {
-      display: none;
-    }
-  </style>
+  /* Κουμπί για μουσική (απαραίτητο σε κινητά) */
+  .music-btn {
+    margin-top: 14px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    font-size: 14px;
+  }
+</style>
 </head>
 
 <body>
-  <div class="container">
-
-    <div class="photo-frame">
-      <img src="https://raw.githubusercontent.com/FotisVal/Fotis_Smargda/main/imgSF.jpg" alt="Fotis & Smaragda" />
-    </div>
+  <div class="wrapper">
+    <img src="imgSF.jpg" class="photo" />
 
     <div class="names">Σμαράγδα ❤️ Φώτης</div>
     <div class="date">01/10/2025</div>
 
-    <!-- Καρδιές animation -->
-    <div class="heart" style="left:10%; animation-duration:6s;">❤️</div>
-    <div class="heart" style="left:25%; animation-duration:8s; animation-delay:1s;">💖</div>
-    <div class="heart" style="left:40%; animation-duration:7s; animation-delay:2s;">💕</div>
-    <div class="heart" style="left:60%; animation-duration:9s; animation-delay:0.5s;">💗</div>
-    <div class="heart" style="left:75%; animation-duration:6.5s; animation-delay:1.5s;">💓</div>
-    <div class="heart" style="left:90%; animation-duration:8.5s; animation-delay:2.5s;">💞</div>
-
+    <button class="music-btn" onclick="playMusic()">🎵 Παίξε το τραγούδι μας</button>
   </div>
 
-  <!-- Background μουσική -->
-  <audio autoplay loop>
-    <source src=""https://raw.githubusercontent.com/FotisVal/Fotis_Smargda/main/iliaxtida.mp3"" type="audio/mpeg" />
+  <!-- Πολλές καρδιές -->
+  <div class="heart" style="left:10%; animation-duration:7s;">❤️</div>
+  <div class="heart" style="left:25%; animation-duration:9s;">💖</div>
+  <div class="heart" style="left:40%; animation-duration:8s;">💕</div>
+  <div class="heart" style="left:60%; animation-duration:10s;">💗</div>
+  <div class="heart" style="left:75%; animation-duration:7.5s;">💓</div>
+  <div class="heart" style="left:90%; animation-duration:9.5s;">💞</div>
+
+  <audio id="bgMusic" loop>
+    <source src="Iliaxtida.mp3" type="audio/mpeg" />
   </audio>
+
+  <script>
+    function playMusic() {
+      document.getElementById('bgMusic').play();
+    }
+  </script>
 </body>
 </html>
